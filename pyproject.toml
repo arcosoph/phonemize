@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "phonemize"
-version = "0.2.0"  
+version = "0.2.2"  
 authors = [
-  { name="Arcosoph", email="arcosoph.ai@gmail.com" },
+  { name="Arcosoph", email="a5tkabid@gmail.com" },
 ]
-description = "A lightweight and pure Python library for converting text into phonemes, based on a pre-trained model."
+description = "Phonimize is a multilingual grapheme-to-phoneme (G2P) library based on Transformer models, designed for accurate, fast, and easy phoneme generation in text-to-speech systems."
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
@@ -29,8 +29,8 @@ classifiers = [
 
 
 dependencies = [
-    "torch",
-    "numpy"
+    "torch>=2.8, <2.9",
+    "numpy>=2.0, <3.0",
 ]
 
 [project.urls]
