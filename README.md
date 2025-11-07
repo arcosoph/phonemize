@@ -144,6 +144,9 @@ phonemizer("Running the TorchScript model!")
 
 Phonimize is inspired by [DeepPhonemizer](https://github.com/spring-media/DeepPhonemizer), and has been refactored and optimized for simplicity, speed, and modern Python environments.
 
+Phonimize is compatible with Python 3.8+ and distributed under the MIT license.
+Learn more at: https://github.com/arcosoph/phonemize
+
 ## License
 
 This project is released under the MIT License.
