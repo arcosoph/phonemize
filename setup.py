@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 
 setup(
-    name='phonimize',
+    name='phonemize',
     version='0.2.3',
     author='Arcosoph',
     author_email='a5tkabid@gmail.com',
