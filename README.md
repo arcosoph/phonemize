@@ -1,11 +1,11 @@
-# Phonimize
+# Phonemize
 [![Join the Discord](https://img.shields.io/badge/Join%20the%20Discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/rYfShVvacB)
 [![PyPI](https://img.shields.io/pypi/v/phonemize.svg?color=6C63FF&logo=pypi&logoColor=white)](https://pypi.org/project/phonemize/)
 [![Python](https://img.shields.io/pypi/pyversions/phonemize.svg?color=3776AB&logo=python&logoColor=white)](https://pypi.org/project/phonemize/)
 [![PyPI Downloads](https://static.pepy.tech/personalized-badge/phonemize?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BLACK&left_text=downloads)](https://pepy.tech/projects/phonemize)
 [![License](https://img.shields.io/pypi/l/phonemize?color=white&logo=apache&logoColor=black)](https://pypi.org/project/phonemize/)
 
-**Phonimize** is a multilingual **grapheme-to-phoneme (G2P)** conversion library built with Transformer models. It’s designed for **high accuracy**, **fast inference**, and **simple integration** into text-to-speech (TTS) or other speech-related systems.
+**Phonemize** is a multilingual **grapheme-to-phoneme (G2P)** conversion library built with Transformer models. It’s designed for **high accuracy**, **fast inference**, and **simple integration** into text-to-speech (TTS) or other speech-related systems.
 
 
 ---
@@ -22,10 +22,10 @@
 
 ## Installation
 
-To install Phonimize, use the following command:
+To install Phonemize, use the following command:
 
 ```bash
-pip install phonimize
+pip install phonemize
 ```
 
 ## Quickstart
@@ -33,7 +33,7 @@ pip install phonimize
 Load a pre-trained model and perform phoneme prediction with this simple example:
 
 ```python
-from phonimize import Phonemizer
+from phonemize import Phonemizer
 
 # Load the pre-trained model from a checkpoint
 phonemizer = Phonemizer.from_checkpoint("phonemize_m1.pt")
@@ -56,8 +56,8 @@ foʊnɪmaɪzɪŋ æn ɪŋglɪʃ tɛkst ɪz ɪmpəzɪmpəbəl!
 You can easily train your own forward or autoregressive Transformer model. All configuration parameters are defined in a simple YAML file (e.g., `configs/forward.yaml`).
 
 ```python
-from phonimize.preprocess import preprocess
-from phonimize.train import train
+from phonemize.preprocess import preprocess
+from phonemize.train import train
 
 # Define your training data
 train_data = [
@@ -93,7 +93,7 @@ Checkpoints will be saved in the directory specified in your configuration file.
 To perform inference with your trained model:
 
 ```python
-from phonimize import Phonemizer
+from phonemize import Phonemizer
 
 # Load your custom model from a checkpoint
 phonemizer = Phonemizer.from_checkpoint("checkpoints/best_model.pt")
@@ -118,7 +118,7 @@ For optimized performance, you can easily export your trained Transformer model 
 
 ```python
 import torch
-from phonimize import Phonemizer
+from phonemize import Phonemizer
 
 # Load the model from a checkpoint
 phonemizer = Phonemizer.from_checkpoint("checkpoints/best_model.pt")
@@ -142,9 +142,9 @@ phonemizer("Running the TorchScript model!")
 
 ## Acknowledgment
 
-Phonimize is inspired by [DeepPhonemizer](https://github.com/spring-media/DeepPhonemizer), and has been refactored and optimized for simplicity, speed, and modern Python environments.
+Phonemize is inspired by [DeepPhonemizer](https://github.com/spring-media/DeepPhonemizer), and has been refactored and optimized for simplicity, speed, and modern Python environments.
 
-Phonimize is compatible with Python 3.8+ and distributed under the MIT license.
+Phonemize is compatible with Python 3.8+ and distributed under the MIT license.
 Learn more at: https://github.com/arcosoph/phonemize
 
 ## License
