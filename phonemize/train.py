@@ -34,25 +34,35 @@ def train(rank: int,
 
     config = read_config(config_file)
 
+    # choose device early so checkpoints can be loaded onto the correct device
+    device = torch.device(f'cuda:{rank}') if num_gpus > 0 else torch.device('cpu')
+
+    # initialize distributed process group if requested
     if num_gpus > 1:
-        os.environ["MASTER_ADDR"] = config['training']['ddp_host']
-        os.environ["MASTER_PORT"] = config['training']['ddp_post']
-        init_process_group(backend=config['training']['ddp_backend'], rank=rank, world_size=num_gpus)
+        # use safe lookups with sensible defaults
+        master_addr = config['training'].get('ddp_host', '127.0.0.1')
+        master_port = config['training'].get('ddp_port', 12355)
+        os.environ["MASTER_ADDR"] = str(master_addr)
+        os.environ["MASTER_PORT"] = str(master_port)
+        init_process_group(backend=config['training'].get('ddp_backend', 'nccl'),
+                           rank=rank,
+                           world_size=num_gpus)
 
     if checkpoint_file is not None:
         logger.info(f'Restoring model from checkpoint: {checkpoint_file}')
-        model, checkpoint = load_checkpoint(checkpoint_file)
+        # load checkpoint onto the selected device
+        model, checkpoint = load_checkpoint(checkpoint_file, device=device)
         model.train()
-        step = checkpoint['step']
+        step = checkpoint.get('step', 0)
         logger.info(f'Loaded model with step: {step}')
-        for key, val in config['training'].items():
-            val_orig = checkpoint['config']['training'][key]
-            if val_orig != val:
+        # overwrite only when the checkpoint contains the key
+        for key, val in config.get('training', {}).items():
+            val_orig = checkpoint.get('config', {}).get('training', {}).get(key)
+            if val_orig is not None and val_orig != val:
                 logger.info(f'Overwriting training param: {key} {val_orig} --> {val}')
                 checkpoint['config']['training'][key] = val
-        config = checkpoint['config']
-        model_type = config['model']['type']
-        model_type = ModelType(model_type)
+        config = checkpoint.get('config', config)
+        model_type = ModelType(config['model']['type'])
     else:
         logger.info('Initializing new model from config...')
         preprocessor = Preprocessor.from_config(config)
@@ -68,10 +78,7 @@ def train(rank: int,
     logger.info(f'Checkpoints will be stored at {checkpoint_dir.absolute()}')
     loss_type = 'cross_entropy' if model_type.is_autoregressive() else 'ctc'
 
-    if num_gpus > 0:
-        device = torch.device(f'cuda:{rank}')
-    else:
-        device = torch.device('cpu')
+    # device was chosen earlier
 
     use_ddp = True if num_gpus > 1 else False
 

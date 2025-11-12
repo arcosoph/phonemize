@@ -51,13 +51,13 @@ def preprocess(config_file: str,
     data_dir = Path(config['paths']['data_dir'])
     data_dir.mkdir(parents=True, exist_ok=True)
 
-    train_dict = {(l, w): [] for l, w, p in train_data}
-    for l, w, p in train_data:
-        train_dict[(l, w)] = train_dict[(l, w)] + [(l, w, p)]
+    train_dict = {(lang, w): [] for lang, w, p in train_data}
+    for lang, w, p in train_data:
+        train_dict[(lang, w)] = train_dict[(lang, w)] + [(lang, w, p)]
     train_keys = sorted(list(train_dict.keys()))
 
     if val_data is not None:
-        val_data = [(l, w, p) for l, w, p in val_data if l in languages]
+        val_data = [(lang, w, p) for lang, w, p in val_data if lang in languages]
     else:
         n_val = config['preprocessing']['n_val']
         logger.info(f'Performing random split with num val: {n_val}')
@@ -108,8 +108,8 @@ def preprocess(config_file: str,
         phons = ''.join([p for p in phon if p in phoneme_symbols])
         all_data.append((lang, text, phons))
 
-    for l, w, p in all_data:
-        lang_dict = phoneme_dictionary.setdefault(l, {})
+    for lang, w, p in all_data:
+        lang_dict = phoneme_dictionary.setdefault(lang, {})
         if w not in lang_dict:
             lang_dict[w] = p
 

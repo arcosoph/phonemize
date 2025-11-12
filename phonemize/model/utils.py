@@ -53,8 +53,8 @@ def get_dedup_tokens(logits_batch: torch.Tensor) \
     for i in range(logits_batch.size(0)):
         logits = logits_batch[i]
         max_logits, max_indices = torch.max(logits, dim=-1)
-        max_logits = max_logits[max_indices!=0]
-        max_indices = max_indices[max_indices!=0]
+        max_logits = max_logits[max_indices != 0]
+        max_indices = max_indices[max_indices != 0]
         cons_tokens, counts = torch.unique_consecutive(
             max_indices, return_counts=True)
         out_probs_i = torch.zeros(len(counts), device=logits.device)

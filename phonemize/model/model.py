@@ -236,12 +236,12 @@ class AutoregressiveTransformer(Model):
                     break
 
         out_indices = out_indices.transpose(0, 1)  # out shape [N, T]
-        out_logits = torch.cat(out_logits, dim=0).transpose(0, 1) # out shape [N, T, V]
+        out_logits = torch.cat(out_logits, dim=0).transpose(0, 1)  # out shape [N, T, V]
         out_logits = out_logits.softmax(-1)
         out_probs = torch.ones((out_indices.size(0), out_indices.size(1)))
         for i in range(out_indices.size(0)):
-            for j in range(0, out_indices.size(1)-1):
-                out_probs[i, j+1] = out_logits[i, j].max()
+            for j in range(0, out_indices.size(1) - 1):
+                out_probs[i, j + 1] = out_logits[i, j].max()
         return out_indices, out_probs
 
     @classmethod

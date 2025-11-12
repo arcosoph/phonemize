@@ -27,6 +27,11 @@ To install Phonemize, use the following command:
 ```bash
 pip install phonemize
 ```
+To train your own models, install the full package with all training dependencies:
+
+```bash
+
+```
 
 ## Quickstart
 
@@ -144,9 +149,9 @@ phonemizer("Running the TorchScript model!")
 
 Phonemize is inspired by [DeepPhonemizer](https://github.com/spring-media/DeepPhonemizer), and has been refactored and optimized for simplicity, speed, and modern Python environments.
 
-Phonemize is compatible with Python 3.8+ and distributed under the MIT license.
-Learn more at: https://github.com/arcosoph/phonemize
-
 ## License
 
 This project is released under the MIT License.
+
+Phonemize is compatible with Python 3.8+ and distributed under the MIT license.
+Learn more at: https://github.com/arcosoph/phonemize

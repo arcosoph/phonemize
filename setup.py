@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='phonemize',
-    version='0.2.3',
+    version='0.2.4',
     author='Arcosoph',
     author_email='a5tkabid@gmail.com',
     description='Multilingual grapheme-to-phoneme (G2P) conversion using Transformer models.',
@@ -18,9 +18,15 @@ setup(
         'numpy>=2.0,<3.0'
     ],
     extras_require={
-        'tests': ['pytest', 'pytest-cov'],
-        'docs': ['mkdocs', 'mkdocs-material'],
-        'dev': ['bumpversion']
+        'dev': ['pyyaml', 'tqdm', 'tensorboard', 'flake8', 'mypy', 'pytest'],
+        'train': ['tqdm', 'tensorboard', 'pyyaml'],
+        'all': ['pyyaml', 'tqdm', 'tensorboard', 'flake8', 'mypy', 'pytest']
+    },
+    python_requires='>=3.8',
+    url='https://github.com/arcosoph/phonemize',
+    project_urls={
+        'Source': 'https://github.com/arcosoph/phonemize',
+        'Tracker': 'https://github.com/arcosoph/phonemize/issues',
     },
     classifiers=[
         'Development Status :: 4 - Beta',

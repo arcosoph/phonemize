@@ -28,8 +28,10 @@ class LanguageTokenizer:
         """
 
         if lang not in self.lang_index:
-            raise ValueError(f'Language not supported: {lang}. '
-                             f'Supported languages: {self.lang_index.keys()}')
+            raise ValueError(
+                f'Language not supported: {lang}. '
+                f'Supported languages: {list(self.lang_index.keys())}'
+            )
 
         return self.lang_index[lang]
 
@@ -50,14 +52,16 @@ class SequenceTokenizer:
 
     """Tokenizes text and optionally attaches language-specific start index (and non-specific end index)."""
 
-    def __init__(self,
-                 symbols: List[str],
-                 languages: List[str],
-                 char_repeats: int,
-                 lowercase: bool = True,
-                 append_start_end: bool =True,
-                 pad_token='_',
-                 end_token='<end>') -> None:
+    def __init__(
+        self,
+        symbols: List[str],
+        languages: List[str],
+        char_repeats: int,
+        lowercase: bool = True,
+        append_start_end: bool = True,
+        pad_token: str = '_',
+        end_token: str = '<end>',
+    ) -> None:
         """
         Initializes a SequenceTokenizer object.
 
@@ -118,9 +122,8 @@ class SequenceTokenizer:
 
         Args:
           sequence (Iterable[int]): Encoded sequence to be decoded.
-          remove_special_tokens (bool): Whether to remove special tokens such as pad or start and end tokens. (Default value = False)
-          sequence: Iterable[int]: 
-
+          remove_special_tokens (bool): Whether to remove special tokens such as pad, start or end tokens.
+            (Default value = False)
         Returns:
            List[str]: Decoded sequence of symbols.
         """
@@ -165,8 +168,7 @@ class Preprocessor:
         self.phoneme_tokenizer = phoneme_tokenizer
 
     def __call__(self,
-                 item: Tuple[str, Iterable[str], Iterable[str]]) \
-            -> Tuple[int, List[int], List[int]]:
+                 item: Tuple[str, Iterable[str], Iterable[str]]) -> Tuple[int, List[int], List[int]]:
         """
         Preprocesses a data point.
 
@@ -199,16 +201,25 @@ class Preprocessor:
         char_repeats = config['preprocessing']['char_repeats']
         lowercase = config['preprocessing']['lowercase']
         lang_tokenizer = LanguageTokenizer(lang_symbols)
-        text_tokenizer = SequenceTokenizer(symbols=text_symbols,
-                                           languages=lang_symbols,
-                                           char_repeats=char_repeats,
-                                           lowercase=lowercase,
-                                           append_start_end=True)
-        phoneme_tokenizer = SequenceTokenizer(phoneme_symbols,
-                                              languages=lang_symbols,
-                                              lowercase=False,
-                                              char_repeats=1,
-                                              append_start_end=True)
-        return Preprocessor(lang_tokenizer=lang_tokenizer,
-                            text_tokenizer=text_tokenizer,
-                            phoneme_tokenizer=phoneme_tokenizer)
+
+        text_tokenizer = SequenceTokenizer(
+            symbols=text_symbols,
+            languages=lang_symbols,
+            char_repeats=char_repeats,
+            lowercase=lowercase,
+            append_start_end=True,
+        )
+
+        phoneme_tokenizer = SequenceTokenizer(
+            symbols=phoneme_symbols,
+            languages=lang_symbols,
+            lowercase=False,
+            char_repeats=1,
+            append_start_end=True,
+        )
+
+        return Preprocessor(
+            lang_tokenizer=lang_tokenizer,
+            text_tokenizer=text_tokenizer,
+            phoneme_tokenizer=phoneme_tokenizer,
+        )

@@ -120,8 +120,8 @@ class Trainer:
                                     config=config)
                 batch = to_device(batch, self.device)
                 avg_loss = sum(losses) / len(losses) if len(losses) > 0 else math.inf
-                pbar.set_description(desc=f'Rank: {self.rank} | Epoch: {epoch} | Step {step} '
-                                          f'| Loss: {avg_loss:#.4}', refresh=True)
+                # format avg_loss with 4 significant digits (shortened to fit line length)
+                pbar.set_description(desc=f'R{self.rank} E{epoch} S{step} L{avg_loss:.4f}', refresh=True)
 
                 pred = model(batch)
                 loss = criterion(pred, batch)
@@ -155,9 +155,9 @@ class Trainer:
                                               step=step)
                         if eval_result['mean_per'] is not None and eval_result['mean_per'] < best_per:
                             self._save_model(model=model, optimizer=optimizer, checkpoint=checkpoint,
-                                             path=self.checkpoint_dir / f'best_model.pt')
+                                             path=self.checkpoint_dir / 'best_model.pt')
                             self._save_model(model=model, optimizer=None, checkpoint=checkpoint,
-                                             path=self.checkpoint_dir / f'best_model_no_optim.pt')
+                                             path=self.checkpoint_dir / 'best_model_no_optim.pt')
                             scheduler.step(eval_result['mean_per'])
 
                     if step % config['training']['checkpoint_steps'] == 0:
@@ -228,9 +228,9 @@ class Trainer:
                          n_generate_samples: int,
                          step: int) -> None:
 
-        self.writer.add_scalar(f'Phoneme_Error_Rate/mean',
+        self.writer.add_scalar('Phoneme_Error_Rate/mean',
                                eval_result['mean_per'], global_step=step)
-        self.writer.add_scalar(f'Word_Error_Rate/mean',
+        self.writer.add_scalar('Word_Error_Rate/mean',
                                eval_result['mean_wer'], global_step=step)
 
         for lang in lang_samples.keys():

@@ -3,13 +3,16 @@ from typing import List, Tuple, Dict, Any
 from phonemize.training.metrics import phoneme_error, word_error
 
 
-def evaluate_samples(lang_samples: Dict[str, List[Tuple[List[str], List[str], List[str]]]]) -> Dict[str, Any]:
+SamplesType = Dict[str, List[Tuple[List[str], List[str], List[str]]]]
+
+
+def evaluate_samples(lang_samples: SamplesType) -> Dict[str, Any]:
     """Calculates word and phoneme error rates per language and their mean across languages
 
     Args:
       lang_samples (Dict): Data to evaluate. Contains languages as keys and list of result samples as values.
-                           Prediction samples is given as a List of Tuples, where each Tuple is a tokenized representation of
-                           (text, result, target).
+        Prediction samples are represented as a list of tuples. Each tuple is a tokenized
+        representation of (text, result, target).
 
     Returns:
       Dict: Evaluation result carrying word and phoneme error rates per language.

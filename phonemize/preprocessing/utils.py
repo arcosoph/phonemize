@@ -12,10 +12,10 @@ def _product(probs: Union[None, List[float]]) -> float:
 
 
 def _batchify(input: List[Any], batch_size: int) -> List[List[Any]]:
-    l = len(input)
+    n = len(input)
     output = []
-    for i in range(0, l, batch_size):
-        batch = input[i:min(i + batch_size, l)]
+    for i in range(0, n, batch_size):
+        batch = input[i:min(i + batch_size, n)]
         output.append(batch)
-    return output
 
+    return output

@@ -2,10 +2,10 @@ import re
 from itertools import zip_longest
 from typing import Dict, Union, List, Set
 
-from phonemize import PhonemizerResult
-from phonemize.model.model import load_checkpoint
-from phonemize.model.predictor import Predictor
-from phonemize.utils.logging import get_logger
+from .result import PhonemizerResult
+from .model.model import load_checkpoint
+from .model.predictor import Predictor
+from .utils.logging import get_logger
 
 DEFAULT_PUNCTUATION = '().,:?!/–'
 
@@ -31,7 +31,7 @@ class Phonemizer:
                  lang: str,
                  punctuation: str = DEFAULT_PUNCTUATION,
                  expand_acronyms: bool = True,
-                 batch_size:int = 8) -> Union[str, List[str]]:
+                 batch_size: int = 8) -> Union[str, List[str]]:
         """
         Phonemizes a single text or list of texts.
 
@@ -49,7 +49,8 @@ class Phonemizer:
         single_input_string = isinstance(text, str)
         texts = [text] if single_input_string else text
         result = self.phonemise_list(texts=texts, lang=lang,
-                                     punctuation=punctuation, expand_acronyms=expand_acronyms)
+                                     punctuation=punctuation, expand_acronyms=expand_acronyms,
+                                     batch_size=batch_size)
 
         phoneme_lists = [''.join(phoneme_list) for phoneme_list in result.phonemes]
 
