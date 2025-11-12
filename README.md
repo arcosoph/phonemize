@@ -30,7 +30,7 @@ pip install phonemize
 To train your own models, install the full package with all training dependencies:
 
 ```bash
-
+pip install 'phonemize[train]'
 ```
 
 ## Quickstart
