@@ -1,4 +1,8 @@
-﻿# Phonemize
+﻿<p align="center">
+  <img src="https://raw.githubusercontent.com/arcosoph/phonemize/main/assets/logo/phonemize_logo.png" alt="Logo" width="450">
+</p>
+
+# Phonemize
 [![Join the Discord](https://img.shields.io/badge/Join%20the%20Discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/rYfShVvacB)
 [![PyPI](https://img.shields.io/pypi/v/phonemize.svg?color=6C63FF&logo=pypi&logoColor=white)](https://pypi.org/project/phonemize/)
 [![Python](https://img.shields.io/pypi/pyversions/phonemize.svg?color=3776AB&logo=python&logoColor=white)](https://pypi.org/project/phonemize/)
@@ -9,7 +13,7 @@
 
 ---
 
-## 🚀 Quick Access
+## Quick Access
 
 - [Installation](#installation) – Get started in seconds
 - [Quickstart](#quickstart) – Basic usage example
@@ -25,12 +29,12 @@
 
 ## Key Features
 
--   **🚀 Easy-to-use API**: Intuitive Python interface for both training and inference tasks. Get started with just a few lines of code.
--   **🌍 Multilingual Support**: Train and deploy a single unified model across multiple languages without architectural changes.
--   **⚡ High Performance**: Achieve microsecond-level inference latency with state-of-the-art Transformer-based predictions.
--   **🎯 Custom Training**: Train your own specialized models with minimal setup using simple YAML configuration files.
--   **🔊 Optimized for TTS**: Purpose-built for real-time streaming, offline batch processing, and production text-to-speech systems.
--   **📦 TorchScript Export**: Export trained models to TorchScript for hardware-accelerated inference and deployment.
+-   **Easy-to-use API**: Intuitive Python interface for both training and inference tasks. Get started with just a few lines of code.
+-   **Multilingual Support**: Train and deploy a single unified model across multiple languages without architectural changes.
+-   **High Performance**: Achieve microsecond-level inference latency with state-of-the-art Transformer-based predictions.
+-   **Custom Training**: Train your own specialized models with minimal setup using simple YAML configuration files.
+-   **Optimized for TTS**: Purpose-built for real-time streaming, offline batch processing, and production text-to-speech systems.
+-   **TorchScript Export**: Export trained models to TorchScript for hardware-accelerated inference and deployment.
 
 ---
 
@@ -584,11 +588,11 @@ High-quality pre-trained models ready for immediate use:
 
 ## License & Compatibility
 
-📝 **License**: MIT License - Free for commercial and personal use
+ - **License**: MIT License - Free for commercial and personal use
 
-🐍 **Python Support**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
+ - **Python Support**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 
-🔗 **Repository**: [github.com/arcosoph/phonemize](https://github.com/arcosoph/phonemize)
+ - **Repository**: [github.com/arcosoph/phonemize](https://github.com/arcosoph/phonemize)
 
 ---
 
